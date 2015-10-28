@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-    <title>Collapsible Tree Example</title>
+    <title>Tree Menu</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 	
 	<style>
@@ -18,23 +18,57 @@
 
 </head>
 
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="TreeController">
 
 <!-- load the d3.js library --> 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <!-- load angular -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
+
 <script type="text/ng-template"  id="tree_item_renderer.html">
     {{data.name}}
-    <button ng-click="add(data)">Add node</button>
-    <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+    <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Sub-task</button> 
+	<!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Task</h4>
+          </div>
+          <div class="modal-body">
+		      <form role="form">
+		        <div class="form-group">
+		          <input type="text" class="form-control" id="newtask" placeholder="Enter Task" >
+  		        </div>
+		        <button type="submit" class="btn btn-default" data-dismiss="modal" ng-click="add(data)">Add</button>
+    		  </form>
+          </div>
+        </div>
+      
+      </div>
+    </div>   
+    <button class="btn btn-default" ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete Sub-tasks</button>
     <ul>
         <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
-    </ul>
+    </ul>  
 </script>
 
-<ul ng-app="Application" ng-controller="TreeController">
+<script type="text/javascript">
+var task = "";
+var assign = function(){
+	task = document.getElementById("newtask").value;
+}
+</script>
+
+<ul>
     <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
 </ul>
 
