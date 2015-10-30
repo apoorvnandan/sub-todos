@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="AbnTest">
+  <head>
+    <!-- Bootstrap 3-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+    <!-- Angular 1.1.5 or 1.2.12 ?-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js"></script>
+    <script src="directive.js">		</script>
+    <link rel="stylesheet" href="treestyle.css">
+    <!-- js for this page:-->
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="AbnTestController" style="margin:20px">
+    <h2>Todo</h2>
+    <table>
+      <tr>
+        <td style="vertical-align:top;padding:20px">
+          <h6></h6>
+          <a href="#"></a>
+          <!-- All 4 of these pages are generated ( by Grunt ) -->
+          <!-- from this one jade file-->
+          <hr>
+          <ul class="nav nav-list list-group">
+          </ul>
+        </td>
+        <td style="vertical-align:top">
+          <table>
+            <tr>
+              <td style="vertical-align:top">
+                <br>
+                <form role="form">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="newtask" placeholder="Enter Task" >
+                  </div>
+                </form>
+                <button ng-click="try_adding_a_branch()" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Add Branch</button>
+              </td>
+              <td style="vertical-align:top">
+                <div style="width:250px;margin-left:100px;background:whitesmoke;border:1px solid lightgray;border-radius:5px;">
+                  <span ng-if="doing_async">...loading...</span>
+                  <abn-tree tree-data="my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+                </div>
+              </td>
+              <td style="padding:20px;vertical-align:top;">
+                <div style="width:300px" class="alert alert-warning">{{ output }}</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+<script type="text/javascript">
+var task = "";
+var assign = function(){
+  task = document.getElementById("newtask").value;
+}
+</script>
+  </body>
+</html>
