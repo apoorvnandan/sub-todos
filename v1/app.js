@@ -14,11 +14,38 @@ var apparel = new Choice('Todos', [
 //  new Choice('Pants')
 ]);
 //var boats = new Choice('Boats');
+var loadedData = JSON.parse(localStorage.getItem('user'));
+//console.log("actual data : ");
+//console.log(apparel);
+//console.log("loaded data : ");
+//console.log(loadedData);
+var myChoice = convertToChoice(loadedData);
+//console.log("converted data : ");
+//console.log(myChoice);
+function convertToChoice(d){
+	var root = makeChoice(d[0]);
+	return root;
+}
+
+function makeChoice(d){
+	var ret = new Choice(d.name);
+	ret.checked = d.checked;
+	var i;
+	if(d.children)
+	for(i = 0; i < d.children.length; i++){
+		ret.children.push(makeChoice(d.children[i]));
+	}
+	return ret;
+}
 
 app.controller('MainCtrl', function($scope) {
   $scope.name = 'World';
   
-  $scope.myTree = [apparel]; 
+//  $scope.myTree = [apparel]; 
+  $scope.myTree = [myChoice]; 
+  $scope.saveData = function(){
+    localStorage.setItem('user', JSON.stringify($scope.myTree));
+  };
 });
 
 app.directive('choiceTree', function() {
