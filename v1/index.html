@@ -2,7 +2,7 @@
 <html ng-app="plunker" >
 <head>
   <meta charset="utf-8">
-  <title>AngularJS Plunker</title>
+  <title>Sub-Todos</title>
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js"></script>
   <script src="app.js"></script>
@@ -22,14 +22,16 @@
   </style>
 </head>
 <body ng-controller="MainCtrl">
-  <hr />
-	<form role="form">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="newtask" placeholder="Enter Task" >
-                  </div>
+    <strong>Sub-Todos</strong> <span class='tab'></span><button class="btn btn-default btn-sm" ng-click="saveData()">Save</button>	
+    <hr />
+    <form role="form">
+        <div class="form-group">
+            <input type="text" class="form-control" id="newtask" placeholder="Enter Task" >
+        </div>
     </form>
-  <choice-tree ng-model="myTree"></choice-tree>
-  <hr />
+    <choice-tree ng-model="myTree"></choice-tree>
+    <hr />
+
 <!--  $scope.myTree = {{myTree | json}} -->
 <script type="text/javascript">
 var task = "";
